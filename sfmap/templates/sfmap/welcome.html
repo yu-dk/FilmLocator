@@ -1,0 +1,54 @@
+{% extends "sfmap/base.html" %}
+
+{% block main %}
+
+<div class="container">
+    <div class="row">
+    <div id="map-outer", class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <h3> {{film_name}} </h3>
+                {% if locs %}
+                    <p class="list-film"> {{addr_located|length}} locations found </p>
+                    {% for a in addr_located %}
+                        <p> {{a}} </p>
+                    {% endfor %}
+                {% else %}
+                    <p>No locations found </p>
+                {% endif %}
+            </div>
+            <div id="map-canvas" class="col-md-8"></div>
+        </div>
+
+    </div>
+
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key={{SERVER_KEY}}">
+</script>
+
+ <script type="text/javascript">
+      function initialize() {
+        var myLatlng = new google.maps.LatLng({{center_lat}},{{center_lng}} );
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 12
+        };
+       var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+    lms = {{locs_js|safe}}
+    for (i = 0; i < lms.length; i++) {
+        //console.log(i)
+        l = lms[i].fields
+        //console.log(l.geo_lat)
+        var myLatlng = new google.maps.LatLng(l.geo_lat, l.geo_lng );
+        console.log(l.geo_lat);
+        var marker = new google.maps.Marker({position:myLatlng});
+        marker.setMap(map);
+      }
+     }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+ </script>
+
+
+{% endblock %}

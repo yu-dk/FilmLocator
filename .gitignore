@@ -1,0 +1,8 @@
+.idea/
+SF_film/.idea/
+polls/
+todo
+**/__pycache__
+sfmap/fixtures/
+sfmap/migrations/0*
+_yu_oldbutuseful/

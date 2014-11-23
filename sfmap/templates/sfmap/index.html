@@ -1,0 +1,55 @@
+{% extends "sfmap/base.html" %}
+{% load staticfiles %}
+
+
+{% block main %}
+
+<div class="container-fluid">
+    <h1> Find out where you can watch a film </h1>
+</div>
+
+{# Main DOM Elements ############}
+
+<div class="container" >
+ <div class="row">
+     <div class="col-md-6">
+         <h3>Input film name: </h3>
+         <form action="{% url 'sfmap:welcome' %}" method="get" >
+                          {% csrf_token %}
+                          {{form}}
+                          <input type="submit" value="Search">
+                      </form>
+     </div>
+
+     <div class="col-md-6">
+         <h3> Example films: </h3>
+         {% if film_example %}
+             {% for f in film_example %}
+                 <p class="list-film"> {{f}} </p>
+             {% endfor %}
+         {% endif %}
+     </div>
+ </div>
+
+</div>  <!--.container-->
+
+
+
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="{% static "sfmap/jquery-ui.min.js" %}"></script>
+<script>
+jQuery("#id_film_name").autocomplete({
+    source: function (request, response) {
+        jQuery.post("{% url 'sfmap:index' %}", {
+            film_name: request.term
+        }, function (data) {
+            response(data);
+        }, "json");
+    },
+    minLength: 3
+});
+</script>
+
+
+{% endblock %}
+

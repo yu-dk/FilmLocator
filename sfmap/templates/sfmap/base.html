@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <link rel="stylesheet" type="text/css" href="{% static 'sfmap/bootstrap-theme.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sfmap/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'sfmap/sfmap.css' %}" />
+{#    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">#}
+    <meta charset="UTF-8">
+    <title> fine film locations </title>
+</head>
+
+<body>
+{% block main %}
+{% endblock %}
+
+
+<footer class="footer">
+    <div class="container" >
+        <p>
+            Data based on
+            <a href="https://data.sfgov.org/Culture-and-Recreation/Film-Locations-in-San-Francisco/yitu-d5am?"> open data</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+
+</html>
